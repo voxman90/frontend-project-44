@@ -5,7 +5,7 @@
   "bin": {
     "brain-games": "bin/brain-games.js"
   },
-  "main": "index.js",
+  "main": "bin/brain-games.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +19,8 @@
     "eslint": "^8.46.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.28.0"
+  },
+  "dependencies": {
+    "readline-sync": "*"
   }
 }
