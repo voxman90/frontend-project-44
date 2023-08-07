@@ -1,4 +1,5 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es2021": true
@@ -11,5 +12,15 @@
         "sourceType": "module"
     },
     "rules": {
+      "import/extensions": [
+        "warn",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+      ]
     }
 }
