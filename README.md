@@ -12,7 +12,7 @@
 -  00:10 - After cloning, you need to run the ``npm link`` command (as administrator) in the working directory of the package.
 -  00:25 - After that, you need to install the program in the preferred directory with the command ``npm link @hexlet/code``
 -  01:01 - The game is launched with the ``brain-even`` command
--  01:10 - The rules are simple: the user must answer three questions correctly.
+-  01:10 - The rules are simple: the user must answer three questions correctly. The program asks if the number is **even**.
 -  01:23 - If the user answers wrongly, the game ends.
 -  01:33 - If the user answers something else instead of ***yes*** or ***no***, it will be counted as an wrong answer.
 
@@ -20,4 +20,10 @@
 
 [![asciicast](https://asciinema.org/a/J0S3Uj6JRw2rSYiyPdg9iIJTu.svg)](https://asciinema.org/a/J0S3Uj6JRw2rSYiyPdg9iIJTu)
 
-To start the game, you need to run the ``brain-calc`` command. Winning condition: three correct answers. If the user answers incorrectly, the game ends in defeat.
+To start the game, you need to run the ``brain-calc`` command. The program asks to calculate the result of **addition, subtraction or multiplication**. Winning condition: three correct answers. If the user answers incorrectly, the game ends in defeat.
+
+## brain-gcd
+
+[![asciicast](https://asciinema.org/a/wDEo3t732HnHnWBfwF1q4ogS6.svg)](https://asciinema.org/a/wDEo3t732HnHnWBfwF1q4ogS6)
+
+To start the game, you need to run the ``brain-gcd`` command. The program asks to find the **greatest common divisor** of two numbers. Winning condition: three correct answers. If the user answers incorrectly, the game ends in defeat.
