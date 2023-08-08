@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import introduction from '../src/cli.js';
+import gameEngine from '../src/index.js';
 
 (() => {
-  introduction();
+  gameEngine();
 })();
