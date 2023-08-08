@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-import evenGame from '../src/even-game.js';
+import gameEngine from '../src/index.js';
+import evenRules from '../games/even-rules.js';
 
 (() => {
-  evenGame();
+  gameEngine(evenRules);
 })();
