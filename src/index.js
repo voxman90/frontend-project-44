@@ -25,10 +25,10 @@ const gameSession = (gameRules) => {
 
   do {
     const question = gameRules.generateQuestion();
-    const questionText = gameRules.stringifyQuestion(question);
+    const questionDetails = gameRules.stringifyQuestion(question);
     const correctAnswer = gameRules.getAnswer(question);
 
-    console.log(MESSAGES.question(questionText));
+    console.log(MESSAGES.question(questionDetails));
     const userAnswer = readlineSync.question(MESSAGES.answer);
     const isUserAnswerCorrect = correctAnswer === userAnswer;
 
