@@ -15,3 +15,9 @@
 -  01:10 - The rules are simple: the user must answer three questions correctly.
 -  01:23 - If the user answers wrongly, the game ends.
 -  01:33 - If the user answers something else instead of ***yes*** or ***no***, it will be counted as an wrong answer.
+
+## brain-calc
+
+[![asciicast](https://asciinema.org/a/J0S3Uj6JRw2rSYiyPdg9iIJTu.svg)](https://asciinema.org/a/J0S3Uj6JRw2rSYiyPdg9iIJTu)
+
+To start the game, you need to run the ``brain-calc`` command. Winning condition: three correct answers. If the user answers incorrectly, the game ends in defeat.
