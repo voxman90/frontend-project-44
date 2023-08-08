@@ -21,9 +21,17 @@ const QUESTIONS_PER_GAME = 3;
 
 const toYesOrNo = (bool) => (bool) ? 'yes' : 'no';
 
-const toTrueOrFalse = (yesOrNo) => (
-  (yesOrNo.toLowerCase() === 'yes') ? true : false
-);
+const toTrueOrFalse = (string) => {
+  if (string === 'yes') {
+    return true;
+  }
+
+  if (string === 'no') {
+    return false;
+  }
+
+  return null;
+};
 
 const evenGame = () => {
   console.log(MESSAGES.intro);
