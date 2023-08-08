@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/voxman90/frontend-project-44/workflows/hexlet-check/badge.svg)](https://github.com/voxman90/frontend-project-44/actions)",
   "bin": {
-    "brain-games": "bin/brain-games.js"
+    "brain-games": "bin/brain-games.js",
+    "brain-even": "bin/brain-even.js"
   },
   "main": "bin/brain-games.js",
   "scripts": {
@@ -18,7 +19,9 @@
   "devDependencies": {
     "eslint": "^8.46.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.28.0"
+    "eslint-plugin-import": "^2.28.0",
+    "jest": "^29.6.2",
+    "jest-cli": "^29.6.2"
   },
   "dependencies": {
     "readline-sync": "*"
