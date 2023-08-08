@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
 
-import { isEven, getRandomInteger, gcd } from '../src/math.js';
+import { isEven, getRandomInteger, getRandomProgression, gcd } from '../src/math.js';
 
 describe('Test isEven', () => {
   const MIN = 0;
@@ -87,6 +87,44 @@ describe('Test gsd', () => {
       const a = GCD * PRIME_NUMBERS.at(i);
       const b = GCD * PRIME_NUMBERS.at(-(i + 1));
       expect(gcd(a, b)).toBe(GCD);
+    }
+  });
+});
+
+describe('Test getRandomProgression', () => {
+  const MIN_PROGRESSION_LENGTH = 5;
+  const MAX_PROGRESSION_LENGTH = 10;
+
+  const TEST_COUNT = 5;
+
+  test(`${MIN_PROGRESSION_LENGTH} <= progression <= ${MAX_PROGRESSION_LENGTH}`, () => {
+    for (let i = 1; i <= TEST_COUNT; i += 1) {
+      const { length } = getRandomProgression();
+      expect(length).toBeLessThanOrEqual(MAX_PROGRESSION_LENGTH);
+      expect(length).toBeGreaterThanOrEqual(MIN_PROGRESSION_LENGTH);
+    }
+  });
+
+  const getNextProgressionItemFunc = (base, inc) => {
+    let acc = base;
+    return (() => {
+      acc += inc;
+      return acc;
+    });
+  };
+
+  test('undefined rule => arithmetic progression rule', () => {
+    for (let i = 1; i <= TEST_COUNT; i += 1) {
+      const randomProgression = getRandomProgression();
+
+      const { length } = randomProgression;
+      const [baseItem, nextItem] = randomProgression;
+      const inc = nextItem - baseItem;
+      const next = getNextProgressionItemFunc(baseItem, inc);
+
+      for (let j = 1; j < length; j += 1) {
+        expect(randomProgression === next()).toBe(true);
+      }
     }
   });
 });
