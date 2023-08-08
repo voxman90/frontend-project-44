@@ -4,7 +4,9 @@ const MESSAGES = {
   rules: 'Answer "yes" if the number is even, otherwise answer "no".',
 };
 
-const generateQuestion = () => math.getRandomInteger();
+const RANDOM_INTEGER_RANGE = [0, 101];
+
+const generateQuestion = () => math.getRandomInteger(RANDOM_INTEGER_RANGE);
 
 const stringifyQuestion = (num) => `${num}`;
 

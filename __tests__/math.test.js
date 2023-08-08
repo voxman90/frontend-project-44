@@ -31,20 +31,19 @@ describe('getRandomInteger', () => {
   const MIN = 0;
   const MAX = 10;
 
-  test('0 <= getRandomInteger(0, 10) <= 10', () => {
+  test('0 <= getRandomInteger(0, 10) < 10', () => {
     for (let i = 0; i < TIMES; i += 1) {
       const result = getRandomInteger([MIN, MAX]);
-      expect(result).toBeLessThanOrEqual(MAX);
+      expect(result).toBeLessThan(MAX);
       expect(result).toBeGreaterThanOrEqual(MIN);
     }
   });
 
-  test('MSI - 1 <= getRandomInteger(MSI - 1, MSI) <= MSI', () => {
+  test('MSI - 1 <= getRandomInteger(MSI - 1, MSI) < MSI', () => {
     const { MAX_SAFE_INTEGER } = Number;
     for (let i = 0; i < TIMES; i += 1) {
       const result = getRandomInteger([MAX_SAFE_INTEGER - 1, MAX_SAFE_INTEGER]);
-      expect(result).toBeLessThanOrEqual(MAX_SAFE_INTEGER);
-      expect(result).toBeGreaterThanOrEqual(MAX_SAFE_INTEGER - 1);
+      expect(result).toBe(MAX_SAFE_INTEGER - 1);
     }
   });
 });

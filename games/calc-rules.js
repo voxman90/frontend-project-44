@@ -5,13 +5,14 @@ const MESSAGES = {
 };
 
 const MIN_INEGER = 0;
-const MAX_INEGER = 100;
+const MAX_INEGER = 20;
 const OPERAND_RANGE = [MIN_INEGER, MAX_INEGER];
-const OPERATION_INDEX_RANGE = [0, 2];
+const OPERATION_MIN_INDEX = 0;
+const OPERATION_MAX_INDEX = 2;
 const OPERATIONS = ['+', '-', '*'];
 
 const getRandomOperation = () => {
-  const index = math.getRandomInteger(OPERATION_INDEX_RANGE);
+  const index = math.getRandomInteger([OPERATION_MIN_INDEX, OPERATION_MAX_INDEX + 1]);
   return OPERATIONS[index];
 };
 
