@@ -5,12 +5,13 @@ import math from '../src/math.js';
 
 const {
   isEven,
+  isPrimal,
   getRandomInteger,
   getRandomProgression,
   gcd,
 } = math;
 
-describe('Test isEven', () => {
+describe('Test isEven:', () => {
   const loopLimit = 20;
 
   test('isEven(n) === true | even(n)\n isEven(n) === false | odd(n)', () => {
@@ -21,7 +22,22 @@ describe('Test isEven', () => {
   });
 });
 
-describe('Test getRandomInteger', () => {
+describe('Test isPrimal:', () => {
+  const {
+    PRIMAL_NUMBERS,
+    NON_PRIMAL_NUMBERS,
+  } = config;
+
+  test('isPrimal(n) === true | primal(n))', () => {
+    expect(PRIMAL_NUMBERS.every(isPrimal)).toBe(true);
+  });
+
+  test('isPrimal(n) === false | not(primal(n))', () => {
+    expect(NON_PRIMAL_NUMBERS.some(isPrimal)).toBe(false);
+  });
+});
+
+describe('Test getRandomInteger:', () => {
   const loopCount = 10;
 
   test('getRandomInteger(_, _) === n | integer(n)', () => {
@@ -49,7 +65,7 @@ describe('Test getRandomInteger', () => {
   });
 });
 
-describe('Test gsd', () => {
+describe('Test gsd:', () => {
   const loopCount = 10;
 
   test('gcd(a, 0) === a', () => {
@@ -97,7 +113,7 @@ describe('Test gsd', () => {
   });
 });
 
-describe('Test getRandomProgression', () => {
+describe('Test getRandomProgression:', () => {
   const {
     PROGRESSION_MIN_SIZE,
     PROGRESSION_MAX_SIZE,

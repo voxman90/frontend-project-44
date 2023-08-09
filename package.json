@@ -1,12 +1,13 @@
 {
   "name": "@hexlet/code",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "[![Actions Status](https://github.com/voxman90/frontend-project-44/workflows/hexlet-check/badge.svg)](https://github.com/voxman90/frontend-project-44/actions)",
   "bin": {
     "brain-calc": "bin/brain-calc.js",
     "brain-even": "bin/brain-even.js",
     "brain-games": "bin/brain-games.js",
     "brain-gcd": "bin/brain-gcd.js",
+    "brain-prime": "bin/brain-prime.js",
     "brain-progression": "bin/brain-progression.js"
   },
   "main": "src/index.js",

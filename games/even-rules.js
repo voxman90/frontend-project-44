@@ -5,7 +5,7 @@ const { RANDOM_INT_RANGE } = config;
 
 const RULE = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-const generateRandomInt = () => math.getRandomInteger(RANDOM_INT_RANGE);
+const generateRandomInt = (range = RANDOM_INT_RANGE) => math.getRandomInteger(range);
 
 const stringifyInt = (num) => `${num}`;
 
