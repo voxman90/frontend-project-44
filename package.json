@@ -27,7 +27,7 @@
   "type": "module",
   "homepage": "https://github.com/voxman90/frontend-project-44#readme",
   "dependencies": {
-    "readline-sync": "^9.6.7"
+    "readline-sync": "*"
   },
   "devDependencies": {
     "@jest/globals": "^29.6.2",
