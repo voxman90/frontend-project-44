@@ -1,49 +1,48 @@
 import { describe, expect, test } from '@jest/globals';
 
-import progressionRules from '../games/progression-rules';
+import config from '../src/config.js';
+import { generateProgression, stringifyProgression, getSkippedItem } from '../games/progression-rules.js';
 
-const { generateQuestion, stringifyQuestion, getAnswer } = progressionRules;
+const {
+  PROGRESSION_MIN_SIZE,
+  PROGRESSION_MAX_SIZE,
+  PROGRESSION_SKIP_MARK: MARK,
+  PROGRESSION_SEPARATOR: WS,
+} = config;
 
-describe('Test generateQuestion', () => {
-  const COUNT = 5;
-  const MIN_PROGRESSION_LENGTH = 5;
+describe('Test generateProgression', () => {
+  const loopCount = 5;
 
-  test(`generateQuestion() => arr, arr.length >= ${MIN_PROGRESSION_LENGTH}`, () => {
-    for (let i = 0; i < COUNT; i += 1) {
-      const { progression } = generateQuestion();
-      expect(progression.length).toBeGreaterThanOrEqual(MIN_PROGRESSION_LENGTH);
+  test(`generateProgression() => arr | ${PROGRESSION_MIN_SIZE} <= arr.length <= ${PROGRESSION_MAX_SIZE}`, () => {
+    for (let i = 0; i < loopCount; i += 1) {
+      const { progression: { length } } = generateProgression();
+      expect(length).toBeGreaterThanOrEqual(PROGRESSION_MIN_SIZE);
+      expect(length).toBeLessThanOrEqual(PROGRESSION_MAX_SIZE);
     }
   });
 });
 
-describe('Test stringifyQuestion', () => {
-  const PROGRESSION = [1, 3, 5, 7, 9];
+describe('Test stringifyProgression', () => {
+  const progression = [1, 3, 5];
 
-  test('stringifyQuestion({[1, 3, 5, 7, 9], skip: 2 }) === 1 3 .. 7 9', () => {
-    expect(stringifyQuestion({
-      progression: PROGRESSION,
-      skip: 0,
-    })).toBe('.. 3 5 7 9');
-    expect(stringifyQuestion({
-      progression: PROGRESSION,
-      skip: 2,
-    })).toBe('1 3 .. 7 9');
-    expect(stringifyQuestion({
-      progression: PROGRESSION,
-      skip: PROGRESSION.length - 1,
-    })).toBe('1 3 5 7 ..');
+  test('stringifyProgression({[1, 3, 5], skipIndex: 1 }) === \'1 .. 5\'', () => {
+    expect(stringifyProgression({ progression, skipIndex: 0 }))
+      .toBe(`${MARK}${WS}3${WS}5`);
+    expect(stringifyProgression({ progression, skipIndex: 1 }))
+      .toBe(`1${WS}${MARK}${WS}5`);
+    expect(stringifyProgression({ progression, skipIndex: 2 }))
+      .toBe(`1${WS}3${WS}${MARK}`);
   });
 });
 
-describe('Test getAnswer === String(skiped number in progression)', () => {
-  const PROGRESSION = [4, 7, 10, 13, 16, 19, 22, 25, 28, 31];
+describe('Test getSkippedItem', () => {
+  const progression = [4, 7, 10, 13, 16, 19, 22, 25, 28, 31];
+  const { length } = progression;
 
-  for (let i = 0; i < PROGRESSION.length; i += 1) {
-    test(`getAnswer(${PROGRESSION}, skip: ${i}) === ${PROGRESSION[i]}`, () => {
-      expect(getAnswer({
-        progression: PROGRESSION,
-        skip: i,
-      })).toBe(`${PROGRESSION[i]}`);
+  for (let i = 0; i < length; i += 1) {
+    test(`getSkippedItem(${progression}, ${i}) === ${progression[i]}`, () => {
+      expect(getSkippedItem({ progression, skipIndex: i }))
+        .toBe(progression[i]);
     });
   }
 });

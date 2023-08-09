@@ -1,19 +1,22 @@
 {
   "name": "@hexlet/code",
-  "version": "1.0.0",
+  "version": "0.0.7",
   "description": "[![Actions Status](https://github.com/voxman90/frontend-project-44/workflows/hexlet-check/badge.svg)](https://github.com/voxman90/frontend-project-44/actions)",
   "bin": {
-    "brain-games": "bin/brain-games.js",
-    "brain-even": "bin/brain-even.js",
     "brain-calc": "bin/brain-calc.js",
+    "brain-even": "bin/brain-even.js",
+    "brain-games": "bin/brain-games.js",
     "brain-gcd": "bin/brain-gcd.js",
     "brain-progression": "bin/brain-progression.js"
   },
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
-  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxman90/frontend-project-44.git"
+  },
   "keywords": [
     "js",
     "Makefile",
@@ -21,6 +24,11 @@
   ],
   "author": "Maxim Byts",
   "license": "ISC",
+  "type": "module",
+  "homepage": "https://github.com/voxman90/frontend-project-44#readme",
+  "dependencies": {
+    "readline-sync": "^9.6.7"
+  },
   "devDependencies": {
     "@jest/globals": "^29.6.2",
     "eslint": "^8.46.0",
@@ -29,8 +37,5 @@
     "eslint-plugin-jest": "^27.2.3",
     "jest": "^29.6.2",
     "jest-cli": "^29.6.2"
-  },
-  "dependencies": {
-    "readline-sync": "*"
   }
 }

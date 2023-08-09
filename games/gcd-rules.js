@@ -1,25 +1,25 @@
+import config from '../src/config.js';
 import math from '../src/math.js';
 
-const MESSAGES = {
-  rules: 'Find the greatest common divisor of given numbers.',
-};
+const { RANDOM_INT_RANGE } = config;
 
-const RANDOM_INTEGER_RANGE = [1, 101];
+const RULE = 'Find the greatest common divisor of given numbers.';
 
-const generateQuestion = () => ({
-  a: math.getRandomInteger(RANDOM_INTEGER_RANGE),
-  b: math.getRandomInteger(RANDOM_INTEGER_RANGE),
+const generatePair = () => ({
+  a: math.getRandomInteger(RANDOM_INT_RANGE),
+  b: math.getRandomInteger(RANDOM_INT_RANGE),
 });
 
-const stringifyQuestion = ({ a, b }) => `${a} ${b}`;
+const stringifyPair = ({ a, b }) => `${a} ${b}`;
 
-const getAnswer = ({ a, b }) => `${math.gcd(a, b)}`;
+const getGCD = ({ a, b }) => math.gcd(a, b);
 
 const gcdRules = {
-  MESSAGES,
-  generateQuestion,
-  stringifyQuestion,
-  getAnswer,
+  RULE,
+  generateQuestion: generatePair,
+  stringifyQuestion: stringifyPair,
+  getAnswer: (args) => `${getGCD(args)}`,
 };
 
 export default gcdRules;
+export { generatePair, stringifyPair, getGCD };

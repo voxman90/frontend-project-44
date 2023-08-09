@@ -1,22 +1,22 @@
+import config from '../src/config.js';
 import math from '../src/math.js';
 
-const MESSAGES = {
-  rules: 'Answer "yes" if the number is even, otherwise answer "no".',
-};
+const { RANDOM_INT_RANGE } = config;
 
-const RANDOM_INTEGER_RANGE = [0, 101];
+const RULE = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-const generateQuestion = () => math.getRandomInteger(RANDOM_INTEGER_RANGE);
+const generateRandomInt = () => math.getRandomInteger(RANDOM_INT_RANGE);
 
-const stringifyQuestion = (num) => `${num}`;
+const stringifyInt = (num) => `${num}`;
 
 const getAnswer = (num) => (math.isEven(num) ? 'yes' : 'no');
 
 const evenRules = {
-  MESSAGES,
-  generateQuestion,
-  stringifyQuestion,
+  RULE,
+  generateQuestion: generateRandomInt,
+  stringifyQuestion: stringifyInt,
   getAnswer,
 };
 
 export default evenRules;
+export { generateRandomInt, stringifyInt, getAnswer };

@@ -1,39 +1,39 @@
+import config from '../src/config.js';
 import math from '../src/math.js';
 
-const MESSAGES = {
-  rules: 'What is the result of the expression?',
-};
+const {
+  OPERAND_RANGE,
+  OPERATIONS,
+} = config;
 
-const MIN_INEGER = 0;
-const MAX_INEGER = 20;
-const OPERAND_RANGE = [MIN_INEGER, MAX_INEGER];
+const RULE = 'What is the result of the expression?';
+
 const OPERATION_MIN_INDEX = 0;
-const OPERATION_MAX_INDEX = 2;
-const OPERATIONS = ['+', '-', '*'];
+const OPERATION_MAX_INDEX = OPERATIONS.length - 1;
 
 const getRandomOperation = () => {
-  const index = math.getRandomInteger([OPERATION_MIN_INDEX, OPERATION_MAX_INDEX + 1]);
+  const index = math.getRandomInteger([OPERATION_MIN_INDEX, OPERATION_MAX_INDEX]);
   return OPERATIONS[index];
 };
 
-const generateQuestion = () => ({
+const generateOperation = () => ({
   a: math.getRandomInteger(OPERAND_RANGE),
   b: math.getRandomInteger(OPERAND_RANGE),
   operation: getRandomOperation(),
 });
 
-const stringifyQuestion = ({ a, b, operation }) => `${a} ${operation} ${b}`;
+const stringifyOperation = ({ a, b, operation }) => `${a} ${operation} ${b}`;
 
-const getAnswer = ({ a, b, operation }) => {
+const applyOperation = ({ a, b, operation }) => {
   switch (operation) {
     case '+': {
-      return `${a + b}`;
+      return a + b;
     }
     case '-': {
-      return `${a - b}`;
+      return a - b;
     }
     case '*': {
-      return `${a * b}`;
+      return a * b;
     }
     default:
       return null;
@@ -41,10 +41,11 @@ const getAnswer = ({ a, b, operation }) => {
 };
 
 const calcRules = {
-  MESSAGES,
-  generateQuestion,
-  stringifyQuestion,
-  getAnswer,
+  RULE,
+  generateQuestion: generateOperation,
+  stringifyQuestion: stringifyOperation,
+  getAnswer: (args) => `${applyOperation(args)}`,
 };
 
 export default calcRules;
+export { generateOperation, stringifyOperation, applyOperation };

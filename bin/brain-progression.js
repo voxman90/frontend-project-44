@@ -3,6 +3,4 @@
 import gameEngine from '../src/index.js';
 import progressionRules from '../games/progression-rules.js';
 
-(() => {
-  gameEngine(progressionRules);
-})();
+gameEngine(progressionRules);

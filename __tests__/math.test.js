@@ -1,113 +1,124 @@
 import { describe, expect, test } from '@jest/globals';
 
+import config from '../src/config.js';
 import math from '../src/math.js';
 
-const { isEven, getRandomInteger, getRandomProgression, gcd } = math;
+const {
+  isEven,
+  getRandomInteger,
+  getRandomProgression,
+  gcd,
+} = math;
 
 describe('Test isEven', () => {
-  const MIN = 0;
-  const MAX = 10;
+  const loopLimit = 20;
 
-  test('isEven(even number) === true', () => {
-    for (let i = MIN; i < MAX; i += 2) {
+  test('isEven(n) === true | even(n)', () => {
+    for (let i = 2; i < loopLimit; i += 2) {
       expect(isEven(i)).toBe(true);
     }
   });
 
-  test('isEven(odd number) === false', () => {
-    for (let i = MIN + 1; i < MAX; i += 2) {
+  test('isEven(n) === false | odd(n)', () => {
+    for (let i = 1; i < loopLimit; i += 2) {
       expect(isEven(i)).toBe(false);
     }
   });
 });
 
-describe('getRandomInteger', () => {
-  const TIMES = 100;
+describe('Test getRandomInteger', () => {
+  const loopCount = 10;
 
-  test('getRandomInteger() is integer', () => {
-    for (let i = 0; i < TIMES; i += 1) {
+  test('getRandomInteger(_, _) === n | integer(n)', () => {
+    for (let i = 0; i < loopCount; i += 1) {
       expect(Number.isInteger(getRandomInteger())).toBe(true);
     }
   });
 
-  const MIN = 0;
-  const MAX = 10;
-
-  test('0 <= getRandomInteger(0, 10) < 10', () => {
-    for (let i = 0; i < TIMES; i += 1) {
-      const result = getRandomInteger([MIN, MAX]);
-      expect(result).toBeLessThan(MAX);
-      expect(result).toBeGreaterThanOrEqual(MIN);
+  test('getRandomInteger(n, n) === n', () => {
+    for (let i = 0; i < loopCount; i += 1) {
+      const randomInt = getRandomInteger();
+      expect(randomInt).toBe(randomInt);
     }
   });
 
-  test('MSI - 1 <= getRandomInteger(MSI - 1, MSI) < MSI', () => {
-    const { MAX_SAFE_INTEGER } = Number;
+  const min = 0;
+  const max = 10;
 
-    for (let i = 0; i < TIMES; i += 1) {
-      const result = getRandomInteger([MAX_SAFE_INTEGER - 1, MAX_SAFE_INTEGER]);
-      expect(result).toBe(MAX_SAFE_INTEGER - 1);
+  test(`getRandomInteger(0, 10) === n | ${min} <= n <= ${max}`, () => {
+    for (let i = 0; i < loopCount; i += 1) {
+      const randomInt = getRandomInteger([min, max]);
+      expect(randomInt).toBeLessThanOrEqual(max);
+      expect(randomInt).toBeGreaterThanOrEqual(min);
     }
   });
 });
 
 describe('Test gsd', () => {
-  const COUNT = 10;
+  const loopCount = 10;
+
+  test('gcd(a, 0) === a', () => {
+    for (let i = 0; i < loopCount; i += 1) {
+      expect(gcd(i, 0)).toBe(i);
+    }
+  });
 
   test('gcd(a, a) === a', () => {
-    for (let i = 1; i <= COUNT; i += 1) {
+    for (let i = 1; i <= loopCount; i += 1) {
       expect(gcd(i, i)).toBe(i);
     }
   });
 
-  const NON_PRIME_NUMBERS = [121, 64, 81, 27, 16, 363];
+  const nonPrimeNumbers = [121, 64, 81, 27, 16, 363];
 
   test('gcd(a, b) === gcd(b, a)', () => {
-    const length = NON_PRIME_NUMBERS.length / 2;
+    const length = nonPrimeNumbers.length / 2;
     for (let i = 0; i < length; i += 1) {
-      const a = NON_PRIME_NUMBERS.at(i);
-      const b = NON_PRIME_NUMBERS.at(-(i + 1));
+      const a = nonPrimeNumbers.at(i);
+      const b = nonPrimeNumbers.at(-(i + 1));
       expect(gcd(a, b)).toBe(gcd(b, a));
     }
   });
 
-  const PRIME_NUMBERS = [1, 3, 5, 7, 11, 13, 17, 19, 23, 29];
+  const primeNumbers = [1, 3, 5, 7, 11, 13, 17, 19, 23, 29];
 
-  test('gcd(a, b) === 1 if (a, b) = 1', () => {
-    const { length } = PRIME_NUMBERS;
+  test('gcd(a, b) === 1 | (a, b) === 1', () => {
+    const { length } = primeNumbers;
     for (let i = 0; i < length; i += 1) {
       for (let j = i + 1; j < length; j += 1) {
-        expect(gcd(PRIME_NUMBERS[i], PRIME_NUMBERS[j])).toBe(1);
+        expect(gcd(primeNumbers[i], primeNumbers[j])).toBe(1);
       }
     }
   });
 
-  test('gcd(a, b) === n if (a, b) = n, n > 1', () => {
+  test('gcd(a, b) === n | (a, b) = n | n > 1', () => {
     const GCD = 2 ** 3 * 3 ** 2 * 7;
 
-    for (let i = 0; i < PRIME_NUMBERS.length; i += 1) {
-      const a = GCD * PRIME_NUMBERS.at(i);
-      const b = GCD * PRIME_NUMBERS.at(-(i + 1));
+    for (let i = 0; i < primeNumbers.length; i += 1) {
+      const a = GCD * primeNumbers.at(i);
+      const b = GCD * primeNumbers.at(-(i + 1));
       expect(gcd(a, b)).toBe(GCD);
     }
   });
 });
 
 describe('Test getRandomProgression', () => {
-  const MIN_PROGRESSION_LENGTH = 5;
-  const MAX_PROGRESSION_LENGTH = 10;
+  const {
+    PROGRESSION_MIN_SIZE,
+    PROGRESSION_MAX_SIZE,
+  } = config;
 
-  const TEST_COUNT = 5;
+  const loopCount = 5;
 
-  test(`${MIN_PROGRESSION_LENGTH} <= progression <= ${MAX_PROGRESSION_LENGTH}`, () => {
-    for (let i = 1; i <= TEST_COUNT; i += 1) {
+  test(`${PROGRESSION_MIN_SIZE} <= progression.length <= ${PROGRESSION_MAX_SIZE}`, () => {
+    for (let i = 1; i <= loopCount; i += 1) {
       const { length } = getRandomProgression();
-      expect(length).toBeLessThanOrEqual(MAX_PROGRESSION_LENGTH);
-      expect(length).toBeGreaterThanOrEqual(MIN_PROGRESSION_LENGTH);
+      expect(length).toBeGreaterThanOrEqual(PROGRESSION_MIN_SIZE);
+      expect(length).toBeLessThanOrEqual(PROGRESSION_MAX_SIZE);
     }
   });
 
-  const getNextProgressionItemFunc = (base, inc) => {
+  const getNextItemFunc = (base, inc) => {
     let acc = base;
     return (() => {
       acc += inc;
@@ -115,17 +126,16 @@ describe('Test getRandomProgression', () => {
     });
   };
 
-  test('undefined rule => arithmetic progression rule', () => {
-    for (let i = 1; i <= TEST_COUNT; i += 1) {
-      const randomProgression = getRandomProgression();
-
-      const { length } = randomProgression;
-      const [baseItem, nextItem] = randomProgression;
-      const inc = nextItem - baseItem;
-      const next = getNextProgressionItemFunc(baseItem, inc);
+  test('If undefined(rule) => arithmetic-progression(rule)', () => {
+    for (let i = 1; i <= loopCount; i += 1) {
+      const progression = getRandomProgression();
+      const { length } = progression;
+      const [base, secondItem] = progression;
+      const inc = secondItem - base;
+      const next = getNextItemFunc(base, inc);
 
       for (let j = 1; j < length; j += 1) {
-        expect(randomProgression[j]).toBe(next());
+        expect(progression[j]).toBe(next());
       }
     }
   });

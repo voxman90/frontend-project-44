@@ -1,33 +1,30 @@
 import readlineSync from 'readline-sync';
 
-const MESSAGES = {
-  intro: 'Welcome to the Brain Games!',
-  askUserName: 'May I have your name? ',
-  greetings: (userName) => `Hello, ${userName}!`,
-  answer: 'Your answer: ',
-  question: (details) => `Question: ${details}`,
-  correctAnsw: 'Correct!',
-  wrongAnsw: (userAnsw, correctAnsw) => (
-    `'${userAnsw}' is wrong answer ;(. Correct answer was '${correctAnsw}'.`
-  ),
-  userLoses: (userName) => `Let's try again, ${userName}!`,
-  userWins: (userName) => `Congratulations, ${userName}!`,
-};
+import config from './config.js';
 
-const QUESTIONS_PER_GAME = 3;
+const {
+  MESSAGES,
+  QUESTIONS_PER_GAME,
+} = config;
 
 const gameSession = (gameRules) => {
-  console.log(gameRules.MESSAGES.rules);
+  // display the game rule
+  console.log(gameRules.RULE);
 
   let isGameOver = false;
   let isUserLoses = false;
   let answerCount = 0;
 
   do {
+    /*
+      Get the game-specific form of the question content,
+      its string representation and the correct answer (string)
+    */
     const question = gameRules.generateQuestion();
     const questionDetails = gameRules.stringifyQuestion(question);
     const correctAnswer = gameRules.getAnswer(question);
 
+    // Get the user's answer to the question and check it
     console.log(MESSAGES.question(questionDetails));
     const userAnswer = readlineSync.question(MESSAGES.answer);
     const isUserAnswerCorrect = correctAnswer === userAnswer;
@@ -47,14 +44,17 @@ const gameSession = (gameRules) => {
 };
 
 const gameEngine = (gameRules = null) => {
+  // Display the intro, get the user's name and greet the user
   console.log(MESSAGES.intro);
   const userName = readlineSync.question(MESSAGES.askUserName);
   console.log(MESSAGES.greetings(userName));
 
+  // If the rules of the game aren't set, the program is terminated
   if (gameRules === null) {
     return;
   }
 
+  // Getting the result of the game session (according to the gameRules)
   const isUserLoses = gameSession(gameRules);
 
   const conclusion = (isUserLoses) ? MESSAGES.userLoses : MESSAGES.userWins;

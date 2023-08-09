@@ -17,6 +17,6 @@
         "no-console": 0,
         "import/extensions": 0,
         "consistent-return": 0,
-        "object-curly-newline": ["error", { "ImportDeclaration": "never" }]
+        "object-curly-newline": ["warn", { "ImportDeclaration": "always" }]
     }
 }

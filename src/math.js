@@ -1,21 +1,32 @@
+import config from './config.js';
+
+const {
+  DEFAULT_RANDOM_INT_RANGE,
+  DEFAULT_PROG_BASE_RANGE,
+  DEFAULT_PROG_INC_RANGE,
+  DEFAULT_PROG_SIZE_RANGE,
+} = config;
+
 const isEven = (n) => n % 2 === 0;
 
-const getRandomInteger = (range = [1, Number.MAX_SAFE_INTEGER]) => {
+// [0, 1) => [min, max] (including boundaries)
+const getRandomInteger = (range = DEFAULT_RANDOM_INT_RANGE) => {
   const [min, max] = range;
-  return min + Math.floor(Math.random() * (max - min));
+  return min + Math.floor(Math.random() * (max - min + 1));
 };
 
-const DEFAULT_BASE_RANGE = [1, 100];
-const DEFAULT_INC_RANGE = [1, 10];
-const DEFAULT_SIZE_RANGE = [5, 10];
-
-const getRandomProgression = ({ sizeRange, baseRange, incRange, rule } = {}) => {
-  const randomBase = getRandomInteger(baseRange || DEFAULT_BASE_RANGE);
-  const randomInc = getRandomInteger(incRange || DEFAULT_INC_RANGE);
-  const size = getRandomInteger(sizeRange || DEFAULT_SIZE_RANGE);
+/*
+  a_0 = base, ..., a_n = rule(a_{n - 1}, inc?) where n: size[0] <= n <= size[1]
+  By default (without a specified rule) the function will return an arithmetic sequence
+*/
+const getRandomProgression = ({ baseRange, incRange, sizeRange, rule } = {}) => {
+  const randomBase = getRandomInteger(baseRange || DEFAULT_PROG_BASE_RANGE);
+  const randomInc = getRandomInteger(incRange || DEFAULT_PROG_INC_RANGE);
+  const size = getRandomInteger(sizeRange || DEFAULT_PROG_SIZE_RANGE);
   const map = (rule === undefined) ? (n, inc) => n + inc : rule;
 
   const progression = [randomBase];
+
   for (let i = 1; i < size; i += 1) {
     const nextItem = map(progression.at(-1), randomInc);
     progression.push(nextItem);
