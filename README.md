@@ -30,6 +30,12 @@ To start the game, you need to run the ``brain-gcd`` command. The program asks t
 
 ## brain-progression
 
-[![asciicast](https://asciinema.org/a/ZtVlmTI9HHK5Wk2cBlJ223DL1.svg)](https://asciinema.org/a/ZtVlmTI9HHK5Wk2cBlJ223DL1)
+[![asciicast](https://asciinema.org/a/HUspcy0tO2ihYzks5vyo5KYhF.svg)](https://asciinema.org/a/HUspcy0tO2ihYzks5vyo5KYhF)
 
 To start the game, you need to run the ``brain-progression`` command. The program asks to enter the skipped **member of the progression**.
+
+## brain-prime
+
+[![asciicast](https://asciinema.org/a/HUspcy0tO2ihYzks5vyo5KYhF.svg)](https://asciinema.org/a/HUspcy0tO2ihYzks5vyo5KYhF)
+
+To start the game, you need to run the ``brain-prime`` command. The program asks if the number is **prime**.
