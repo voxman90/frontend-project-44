@@ -22,10 +22,10 @@ const generateOperation = () => ({
   operation: getRandomOperation(),
 });
 
-const stringifyOperation = ({ a, b, operation }) => `${a} ${operation} ${b}`;
+const stringifyOperation = ({ a, b, op }) => `${a} ${op} ${b}`;
 
-const applyOperation = ({ a, b, operation }) => {
-  switch (operation) {
+const applyOperation = ({ a, b, op }) => {
+  switch (op) {
     case '+': {
       return a + b;
     }

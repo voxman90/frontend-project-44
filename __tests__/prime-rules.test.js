@@ -9,6 +9,13 @@ const {
 } = config;
 
 describe('Test isPrimal:', () => {
+  test('Simple tests', () => {
+    expect(isPrimal(1)).toBe('no');
+    expect(isPrimal(2)).toBe('yes');
+    expect(isPrimal(2 * 3 * 4)).toBe('no');
+    expect(isPrimal(97)).toBe('yes');
+  });
+
   test('isPrimal(n) === \'yes\' | primal(n)', () => {
     expect(PRIMAL_NUMBERS.every((n) => isPrimal(n) === 'yes')).toBe(true);
   });

@@ -10,7 +10,7 @@ const {
   PROGRESSION_SEPARATOR: WS,
 } = config;
 
-describe('Test generateProgression', () => {
+describe('Test generateProgression:', () => {
   const loopCount = 5;
 
   test(`generateProgression() => arr | ${PROGRESSION_MIN_SIZE} <= arr.length <= ${PROGRESSION_MAX_SIZE}`, () => {
@@ -22,7 +22,7 @@ describe('Test generateProgression', () => {
   });
 });
 
-describe('Test stringifyProgression', () => {
+describe('Test stringifyProgression:', () => {
   const progression = [1, 3, 5];
   const result = [
     `${MARK}${WS}3${WS}5`,
@@ -39,7 +39,7 @@ describe('Test stringifyProgression', () => {
   });
 });
 
-describe('Test getSkippedItem', () => {
+describe('Test getSkippedItem:', () => {
   const progression = [4, 7, 10, 13, 16, 19, 22, 25, 28, 31];
   const { length } = progression;
 

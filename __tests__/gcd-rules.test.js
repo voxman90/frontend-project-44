@@ -2,27 +2,27 @@ import { describe, test, expect } from '@jest/globals';
 
 import { generatePair, stringifyPair, getGCD } from '../games/gcd-rules.js';
 
-describe('Test generatePair', () => {
+describe('Test generatePair:', () => {
   test('generatePair() === { a, b }', () => {
-    const pair = generatePair();
-    expect(pair.a).not.toBe(undefined);
-    expect(pair.b).not.toBe(undefined);
+    const { a, b } = generatePair();
+    expect(a).not.toBe(undefined);
+    expect(b).not.toBe(undefined);
   });
 });
 
-describe('Test stringifyPair', () => {
+describe('Test stringifyPair:', () => {
   test('stringifyPair({ a, b }) === \'a b\'', () => {
     expect(stringifyPair({ a: 0, b: 1 })).toBe('0 1');
     expect(stringifyPair({ a: 1, b: 0 })).toBe('1 0');
   });
 });
 
-describe('Test getGCD', () => {
+describe('Test getGCD:', () => {
   test('getGCD({ a, b }) === getGCD({ b, a })', () => {
     expect(getGCD({ a: 71, b: 83 })).toBe(getGCD({ a: 83, b: 71 }));
   });
 
-  test('getGCD({ a, b }) === 1 if prime(a) && prime(b)', () => {
+  test('getGCD({ a, b }) === 1 | prime(a) && prime(b)', () => {
     expect(getGCD({ a: 71, b: 83 })).toBe(1);
     expect(getGCD({ a: 3, b: 2 })).toBe(1);
     expect(getGCD({ a: 7, b: 213 })).toBe(1);

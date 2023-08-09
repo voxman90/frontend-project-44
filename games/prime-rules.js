@@ -6,7 +6,7 @@ const { PRIMAL_NUMBERS_RANGE } = config;
 
 const RULE = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
-const isPrimal = (n) => math.isPrimal(n);
+const isPrimal = (n) => (math.isPrimal(n) ? 'yes' : 'no');
 
 const primeRules = {
   RULE,

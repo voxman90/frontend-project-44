@@ -102,7 +102,7 @@ describe('Test gsd:', () => {
     }
   });
 
-  test('gcd(a, b) === n | (a, b) = n | n > 1', () => {
+  test('gcd(a, b) === n | (a, b) = n, n > 1', () => {
     const GCD = 2 ** 3 * 3 ** 2 * 7;
 
     for (let i = 0; i < primeNumbers.length; i += 1) {
