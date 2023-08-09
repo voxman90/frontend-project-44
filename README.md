@@ -26,4 +26,10 @@ To start the game, you need to run the ``brain-calc`` command. The program asks 
 
 [![asciicast](https://asciinema.org/a/wDEo3t732HnHnWBfwF1q4ogS6.svg)](https://asciinema.org/a/wDEo3t732HnHnWBfwF1q4ogS6)
 
-To start the game, you need to run the ``brain-gcd`` command. The program asks to find the **greatest common divisor** of two numbers. Winning condition: three correct answers. If the user answers incorrectly, the game ends in defeat.
+To start the game, you need to run the ``brain-gcd`` command. The program asks to find the **greatest common divisor** of two numbers.
+
+## brain-progression
+
+[![asciicast](https://asciinema.org/a/ZtVlmTI9HHK5Wk2cBlJ223DL1.svg)](https://asciinema.org/a/ZtVlmTI9HHK5Wk2cBlJ223DL1)
+
+To start the game, you need to run the ``brain-progression`` command. The program asks to enter the skipped **member of the progression**.
