@@ -89,7 +89,12 @@ const getRandomInteger = (range = DEFAULT_RANDOM_INT_RANGE) => {
   a_0 = base, ..., a_n = rule(a_{n - 1}, inc?) | n: size[0] <= n <= size[1]
   By default (without a specified rule) the function will return an arithmetic sequence
 */
-const getRandomProgression = ({ baseRange, incRange, sizeRange, rule } = {}) => {
+const getRandomProgression = ({
+  baseRange,
+  incRange,
+  sizeRange,
+  rule,
+} = {}) => {
   const randomBase = getRandomInteger(baseRange || DEFAULT_PROG_BASE_RANGE);
   const randomInc = getRandomInteger(incRange || DEFAULT_PROG_INC_RANGE);
   const size = getRandomInteger(sizeRange || DEFAULT_PROG_SIZE_RANGE);
