@@ -11,6 +11,41 @@ const isEven = (n) => n % 2 === 0;
 
 const isNonPrimalEven = (n) => n > 2 && isEven(n);
 
+// Go through the sequence up to the first divisor of the number n
+const isSequenceIncludesDivisor = (n, sequenceRule) => {
+  let checked = sequenceRule();
+  let includesDivisor = false;
+
+  while (
+    checked !== null
+    && !includesDivisor
+  ) {
+    includesDivisor = n % checked === 0;
+    checked = sequenceRule();
+  }
+
+  return includesDivisor;
+};
+
+/*
+  Returns a function which returns the items of the sequence of the following form:
+  a_1 = start, ..., a_n = a_{n-1} + inc, ..., null, ... | inc > 0
+  a_m = null | m >= n | a_n > end
+*/
+const createSequenceRule = ({ start, end, inc }) => {
+  const absInc = Math.abs(inc) || 1;
+  let num = start;
+  return () => {
+    if (num > end) {
+      return null;
+    }
+
+    const res = num;
+    num += absInc;
+    return res;
+  };
+};
+
 const isPrimal = (n) => {
   // Immediately discard half of the numbers
   if (
@@ -34,22 +69,14 @@ const isPrimal = (n) => {
     1, 2n | n > 2, integer(n) - already discard, so we start checks with 3
     and skip all the even numbers
   */
-  let checked = 3;
-  let hasNonTrivialDivisor = false;
-  const checkLimit = Math.floor(squareRoot);
-  while (
-    checked <= checkLimit
-    && !hasNonTrivialDivisor
-  ) {
-    const isDivisor = n % checked === 0;
-    if (isDivisor) {
-      hasNonTrivialDivisor = true;
-    }
+  const rule = createSequenceRule({
+    start: 3,
+    end: Math.floor(squareRoot),
+    inc: 2,
+  });
+  const hasNonTrivialDivisor = isSequenceIncludesDivisor(n, rule);
 
-    checked += 2;
-  }
-
-  return hasNonTrivialDivisor === false;
+  return !hasNonTrivialDivisor;
 };
 
 // [0, 1) => [min, max] (including boundaries)
