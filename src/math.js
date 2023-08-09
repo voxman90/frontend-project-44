@@ -9,12 +9,13 @@ const {
 
 const isEven = (n) => n % 2 === 0;
 
+const isNonPrimalEven = (n) => n > 2 && isEven(n);
+
 const isPrimal = (n) => {
   // Immediately discard half of the numbers
-  const isNonPrimalEven = n > 2 && isEven(n);
   if (
     n === 1
-    || isNonPrimalEven
+    || isNonPrimalEven(n)
   ) {
     return false;
   }
@@ -24,27 +25,31 @@ const isPrimal = (n) => {
     has a quotient less than the square root of the number
   */
   const squareRoot = Math.sqrt(n);
-  if (Number.isInteger(squareRoot)) {
+  const isSquare = n % squareRoot === 0;
+  if (isSquare) {
     return false;
   }
 
-  const checkLimit = Math.floor(squareRoot);
-
   /*
-    1, 2n | n > 1, integer(n) - already discard, so we start checks with 3
+    1, 2n | n > 2, integer(n) - already discard, so we start checks with 3
     and skip all the even numbers
   */
-  let checkedDivisor = 3;
+  let checked = 3;
   let hasNonTrivialDivisor = false;
-  while (!hasNonTrivialDivisor && checkedDivisor <= checkLimit) {
-    if (n % checkedDivisor === 0) {
+  const checkLimit = Math.floor(squareRoot);
+  while (
+    checked <= checkLimit
+    && !hasNonTrivialDivisor
+  ) {
+    const isDivisor = n % checked === 0;
+    if (isDivisor) {
       hasNonTrivialDivisor = true;
     }
 
-    checkedDivisor += 2;
+    checked += 2;
   }
 
-  return !hasNonTrivialDivisor;
+  return hasNonTrivialDivisor === false;
 };
 
 // [0, 1) => [min, max] (including boundaries)

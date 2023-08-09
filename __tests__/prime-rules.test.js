@@ -16,11 +16,13 @@ describe('Test isPrimal:', () => {
     expect(isPrimal(97)).toBe('yes');
   });
 
+  const every = (func, answer, coll) => coll.every((n) => func(n) === answer);
+
   test('isPrimal(n) === \'yes\' | primal(n)', () => {
-    expect(PRIMAL_NUMBERS.every((n) => isPrimal(n) === 'yes')).toBe(true);
+    expect(every(isPrimal, 'yes', PRIMAL_NUMBERS)).toBe(true);
   });
 
   test('isPrimal(n) === \'no\' | not(primal(n))', () => {
-    expect(NON_PRIMAL_NUMBERS.some((n) => isPrimal(n) === 'yes')).toBe(false);
+    expect(every(isPrimal, 'no', NON_PRIMAL_NUMBERS)).toBe(true);
   });
 });
