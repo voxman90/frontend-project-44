@@ -1,4 +1,4 @@
-import * as math from '../src/math.js';
+import math from '../src/math.js';
 
 const MESSAGES = {
   rules: 'What is the result of the expression?',

@@ -1,6 +1,8 @@
 import { describe, expect, test } from '@jest/globals';
 
-import { isEven, getRandomInteger, getRandomProgression, gcd } from '../src/math.js';
+import math from '../src/math.js';
+
+const { isEven, getRandomInteger, getRandomProgression, gcd } = math;
 
 describe('Test isEven', () => {
   const MIN = 0;
@@ -123,7 +125,7 @@ describe('Test getRandomProgression', () => {
       const next = getNextProgressionItemFunc(baseItem, inc);
 
       for (let j = 1; j < length; j += 1) {
-        expect(randomProgression === next()).toBe(true);
+        expect(randomProgression[j]).toBe(next());
       }
     }
   });
