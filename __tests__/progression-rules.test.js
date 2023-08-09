@@ -10,7 +10,7 @@ describe('Test generateQuestion', () => {
 
   test(`generateQuestion() => arr, arr.length >= ${MIN_PROGRESSION_LENGTH}`, () => {
     for (let i = 0; i < COUNT; i += 1) {
-      const progression = generateQuestion();
+      const { progression } = generateQuestion();
       expect(progression.length).toBeGreaterThanOrEqual(MIN_PROGRESSION_LENGTH);
     }
   });
