@@ -13,15 +13,10 @@ describe('Test stringifyInt', () => {
 describe('Test getAnswer', () => {
   const loopCount = 10;
 
-  test('getAnswer(n) === \'yes\' if even(n)', () => {
-    for (let i = 2; i < loopCount; i += 2) {
+  test('getAnswer(n) === \'yes\' | even(n)\n getAnswer(n) === \'no\' | odd(n)', () => {
+    for (let i = 0; i < loopCount; i += 2) {
       expect(getAnswer(i)).toBe('yes');
-    }
-  });
-
-  test('getAnswer(n) === \'no\' if odd(n)', () => {
-    for (let i = 1; i < loopCount; i += 2) {
-      expect(getAnswer(i)).toBe('no');
+      expect(getAnswer(i + 1)).toBe('no');
     }
   });
 });

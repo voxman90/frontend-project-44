@@ -24,14 +24,18 @@ describe('Test generateProgression', () => {
 
 describe('Test stringifyProgression', () => {
   const progression = [1, 3, 5];
+  const result = [
+    `${MARK}${WS}3${WS}5`,
+    `1${WS}${MARK}${WS}5`,
+    `1${WS}3${WS}${MARK}`,
+  ];
 
   test('stringifyProgression({[1, 3, 5], skipIndex: 1 }) === \'1 .. 5\'', () => {
-    expect(stringifyProgression({ progression, skipIndex: 0 }))
-      .toBe(`${MARK}${WS}3${WS}5`);
-    expect(stringifyProgression({ progression, skipIndex: 1 }))
-      .toBe(`1${WS}${MARK}${WS}5`);
-    expect(stringifyProgression({ progression, skipIndex: 2 }))
-      .toBe(`1${WS}3${WS}${MARK}`);
+    const { length } = stringifyProgression;
+    for (let i = 0; i < length; i += 1) {
+      expect(stringifyProgression({ progression, skipIndex: 0 }))
+        .toBe(result[i]);
+    }
   });
 });
 

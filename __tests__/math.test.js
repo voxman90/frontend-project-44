@@ -13,15 +13,10 @@ const {
 describe('Test isEven', () => {
   const loopLimit = 20;
 
-  test('isEven(n) === true | even(n)', () => {
-    for (let i = 2; i < loopLimit; i += 2) {
+  test('isEven(n) === true | even(n)\n isEven(n) === false | odd(n)', () => {
+    for (let i = 0; i < loopLimit; i += 2) {
       expect(isEven(i)).toBe(true);
-    }
-  });
-
-  test('isEven(n) === false | odd(n)', () => {
-    for (let i = 1; i < loopLimit; i += 2) {
-      expect(isEven(i)).toBe(false);
+      expect(isEven(i + 1)).toBe(false);
     }
   });
 });
