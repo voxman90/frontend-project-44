@@ -96,14 +96,14 @@ const getRandomProgression = ({
   rule,
 } = {}) => {
   const randomBase = getRandomInteger(baseRange || DEFAULT_PROG_BASE_RANGE);
-  const randomInc = getRandomInteger(incRange || DEFAULT_PROG_INC_RANGE);
+  const inc = getRandomInteger(incRange || DEFAULT_PROG_INC_RANGE);
   const size = getRandomInteger(sizeRange || DEFAULT_PROG_SIZE_RANGE);
-  const map = (rule === undefined) ? (n, inc) => n + inc : rule;
+  const map = (rule === undefined) ? (n, incr) => n + incr : rule;
 
   const progression = [randomBase];
 
   for (let i = 1; i < size; i += 1) {
-    const nextItem = map(progression.at(-1), randomInc);
+    const nextItem = map(progression.at(-1), inc);
     progression.push(nextItem);
   }
 
@@ -118,7 +118,7 @@ const gcdRec = (a, b) => {
   return gcdRec(b, a % b);
 };
 
-const gcd = (a, b) => ((a < b) ? gcdRec(b, a) : gcdRec(b, a));
+const gcd = (a, b) => ((a < b) ? gcdRec(b, a) : gcdRec(a, b));
 
 const math = {
   isEven,

@@ -35,6 +35,8 @@ describe('Test getGCD:', () => {
 
   test('getGCD({ a, b }) === (a, b)', () => {
     const gcd = 2 * 3 ** 2 * 5 * 7;
+
+    // (71, 119) === 1
     const a = gcd * 71;
     const b = gcd * 119;
     expect(getGCD({ a, b })).toBe(gcd);
