@@ -11,9 +11,10 @@ const isEven = (n) => n % 2 === 0;
 
 const isPrimal = (n) => {
   // Immediately discard half of the numbers
+  const isNonPrimalEven = n > 2 && isEven(n);
   if (
     n === 1
-    || (n !== 2 && isEven(n))
+    || isNonPrimalEven
   ) {
     return false;
   }

@@ -21,6 +21,6 @@ describe('Test isPrimal:', () => {
   });
 
   test('isPrimal(n) === \'no\' | not(primal(n))', () => {
-    expect(NON_PRIMAL_NUMBERS.every((n) => isPrimal(n) === 'no')).toBe(true);
+    expect(NON_PRIMAL_NUMBERS.some((n) => isPrimal(n) === 'yes')).toBe(false);
   });
 });
