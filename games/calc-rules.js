@@ -19,7 +19,7 @@ const getRandomOperation = () => {
 const generateOperation = () => ({
   a: math.getRandomInteger(OPERAND_RANGE),
   b: math.getRandomInteger(OPERAND_RANGE),
-  operation: getRandomOperation(),
+  op: getRandomOperation(),
 });
 
 const stringifyOperation = ({ a, b, op }) => `${a} ${op} ${b}`;
