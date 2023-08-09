@@ -18,7 +18,7 @@ const gcdRules = {
   RULE,
   generateQuestion: generatePair,
   stringifyQuestion: stringifyPair,
-  getAnswer: (args) => `${getGCD(args)}`,
+  getAnswer: getGCD,
 };
 
 export default gcdRules;

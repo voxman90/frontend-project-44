@@ -22,7 +22,7 @@ const gameSession = (gameRules) => {
     */
     const question = gameRules.generateQuestion();
     const questionDetails = gameRules.stringifyQuestion(question);
-    const correctAnswer = gameRules.getAnswer(question);
+    const correctAnswer = `${gameRules.getAnswer(question)}`;
 
     // Get the user's answer to the question and check it
     console.log(MESSAGES.question(questionDetails));

@@ -41,7 +41,7 @@ const progressionRules = {
   RULE,
   generateQuestion: generateProgression,
   stringifyQuestion: stringifyProgression,
-  getAnswer: (args) => `${getSkippedItem(args)}`,
+  getAnswer: getSkippedItem,
 };
 
 export default progressionRules;

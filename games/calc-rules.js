@@ -44,7 +44,7 @@ const calcRules = {
   RULE,
   generateQuestion: generateOperation,
   stringifyQuestion: stringifyOperation,
-  getAnswer: (args) => `${applyOperation(args)}`,
+  getAnswer: applyOperation,
 };
 
 export default calcRules;
