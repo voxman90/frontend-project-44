@@ -11,15 +11,15 @@ const isEven = (n) => n % 2 === 0;
 
 // Go through the sequence up to the first divisor of the number n
 const isSequenceIncludesDivisor = (n, sequenceGenerator) => {
-  let checked = sequenceGenerator();
+  let checked = sequenceGenerator.next();
   let includesDivisor = false;
 
   while (
-    checked !== null
+    !checked.done
     && !includesDivisor
   ) {
-    includesDivisor = n % checked === 0;
-    checked = sequenceGenerator();
+    includesDivisor = n % checked.value === 0;
+    checked = sequenceGenerator.next();
   }
 
   return includesDivisor;
@@ -27,7 +27,7 @@ const isSequenceIncludesDivisor = (n, sequenceGenerator) => {
 
 /*
   Returns a function which returns the items of the sequence of the following form:
-  a_1 = start, ..., a_n = a_{n-1} + inc, ..., null, ... | inc > 0
+  a_1 = start, ..., a_n = next(a_{n-1}), ..., null, ...
   a_m = null | m >= n | a_n > end
 */
 const createSequenceGenerator = (rules) => {
@@ -37,16 +37,13 @@ const createSequenceGenerator = (rules) => {
     next = (n) => n + 1,
   } = rules;
 
-  let num = start;
-  return () => {
-    if (num > end) {
-      return null;
+  return ((function* gen() {
+    for (let num = start; num <= end; num = next(num)) {
+      yield num;
     }
 
-    const res = num;
-    num = next(num);
-    return res;
-  };
+    return null;
+  })());
 };
 
 const isPrimal = (n) => {
@@ -73,12 +70,12 @@ const isPrimal = (n) => {
     1, 2n | n > 2, integer(n) - already discard, so we start checks with 3
     and skip all the even numbers
   */
-  const sequenceGen = createSequenceGenerator({
+  const posibleDivisorGen = createSequenceGenerator({
     start: 3,
     end: Math.floor(squareRoot),
     next: (x) => x + 2,
   });
-  const hasNonTrivialDivisor = isSequenceIncludesDivisor(n, sequenceGen);
+  const hasNonTrivialDivisor = isSequenceIncludesDivisor(n, posibleDivisorGen);
 
   return !hasNonTrivialDivisor;
 };
