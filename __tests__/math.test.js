@@ -48,8 +48,8 @@ describe('Test getRandomInteger:', () => {
 
   test('getRandomInteger(n, n) === n', () => {
     for (let i = 0; i < loopCount; i += 1) {
-      const randomInt = getRandomInteger();
-      expect(randomInt).toBe(randomInt);
+      const randomInt = getRandomInteger([i, i]);
+      expect(randomInt).toBe(i);
     }
   });
 
