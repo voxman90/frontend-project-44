@@ -9,11 +9,9 @@ const {
 
 const isEven = (n) => n % 2 === 0;
 
-const isNonPrimalEven = (n) => n > 2 && isEven(n);
-
 // Go through the sequence up to the first divisor of the number n
-const isSequenceIncludesDivisor = (n, sequenceRule) => {
-  let checked = sequenceRule();
+const isSequenceIncludesDivisor = (n, sequenceGenerator) => {
+  let checked = sequenceGenerator();
   let includesDivisor = false;
 
   while (
@@ -21,7 +19,7 @@ const isSequenceIncludesDivisor = (n, sequenceRule) => {
     && !includesDivisor
   ) {
     includesDivisor = n % checked === 0;
-    checked = sequenceRule();
+    checked = sequenceGenerator();
   }
 
   return includesDivisor;
@@ -32,8 +30,13 @@ const isSequenceIncludesDivisor = (n, sequenceRule) => {
   a_1 = start, ..., a_n = a_{n-1} + inc, ..., null, ... | inc > 0
   a_m = null | m >= n | a_n > end
 */
-const createSequenceRule = ({ start, end, inc }) => {
-  const absInc = Math.abs(inc) || 1;
+const createSequenceGenerator = (rules) => {
+  const {
+    start,
+    end,
+    next = (n) => n + 1,
+  } = rules;
+
   let num = start;
   return () => {
     if (num > end) {
@@ -41,16 +44,17 @@ const createSequenceRule = ({ start, end, inc }) => {
     }
 
     const res = num;
-    num += absInc;
+    num = next(num);
     return res;
   };
 };
 
 const isPrimal = (n) => {
   // Immediately discard half of the numbers
+  const isNonPrimalEven = n > 2 && isEven(n);
   if (
     n === 1
-    || isNonPrimalEven(n)
+    || isNonPrimalEven
   ) {
     return false;
   }
@@ -69,12 +73,12 @@ const isPrimal = (n) => {
     1, 2n | n > 2, integer(n) - already discard, so we start checks with 3
     and skip all the even numbers
   */
-  const rule = createSequenceRule({
+  const sequenceGen = createSequenceGenerator({
     start: 3,
     end: Math.floor(squareRoot),
-    inc: 2,
+    next: (x) => x + 2,
   });
-  const hasNonTrivialDivisor = isSequenceIncludesDivisor(n, rule);
+  const hasNonTrivialDivisor = isSequenceIncludesDivisor(n, sequenceGen);
 
   return !hasNonTrivialDivisor;
 };

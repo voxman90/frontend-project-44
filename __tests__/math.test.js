@@ -56,7 +56,7 @@ describe('Test getRandomInteger:', () => {
   const min = 0;
   const max = 10;
 
-  test(`getRandomInteger(0, 10) === n | ${min} <= n <= ${max}`, () => {
+  test(`getRandomInteger(min, max) === n | ${min} <= n <= ${max}`, () => {
     for (let i = 0; i < loopCount; i += 1) {
       const randomInt = getRandomInteger([min, max]);
       expect(randomInt).toBeLessThanOrEqual(max);
