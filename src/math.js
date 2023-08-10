@@ -87,25 +87,26 @@ const getRandomInteger = (range = DEFAULT_RANDOM_INT_RANGE) => {
 };
 
 /*
-  a_0 = base, ..., a_n = rule(a_{n - 1}, inc?) | n: size[0] <= n <= size[1]
-  By default (without a specified rule) the function will return an arithmetic sequence
+  a_0 = base, ..., a_n = a_{n - 1} + inc | n: sizeRange[0] <= n <= sizeRange[1]
 */
-const getRandomProgression = ({
-  baseRange,
-  incRange,
-  sizeRange,
-  rule,
-} = {}) => {
-  const randomBase = getRandomInteger(baseRange || DEFAULT_PROG_BASE_RANGE);
+const getRandomProgression = ({ baseRange, incRange, sizeRange } = {}) => {
+  const base = getRandomInteger(baseRange || DEFAULT_PROG_BASE_RANGE);
   const inc = getRandomInteger(incRange || DEFAULT_PROG_INC_RANGE);
   const size = getRandomInteger(sizeRange || DEFAULT_PROG_SIZE_RANGE);
-  const map = (rule === undefined) ? (n, incr) => n + incr : rule;
 
-  const progression = [randomBase];
+  // Create an arithmetic progression
+  const progression = [];
+  const sequenceConfig = {
+    start: base,
+    end: base + (size - 1) * inc,
+    next: (n) => n + inc,
+  };
+  const progressionGen = createSequenceGenerator(sequenceConfig);
+  let item = progressionGen.next();
 
-  for (let i = 1; i < size; i += 1) {
-    const nextItem = map(progression.at(-1), inc);
-    progression.push(nextItem);
+  while (!item.done) {
+    progression.push(item.value);
+    item = progressionGen.next();
   }
 
   return progression;

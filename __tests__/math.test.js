@@ -137,7 +137,7 @@ describe('Test getRandomProgression:', () => {
     });
   };
 
-  test('If undefined(rule) => arithmetic-progression(rule)', () => {
+  test('getRandomProgression() => seq | arithmetic-progression(seq)', () => {
     for (let i = 1; i <= loopCount; i += 1) {
       const progression = getRandomProgression();
       const { length } = progression;
