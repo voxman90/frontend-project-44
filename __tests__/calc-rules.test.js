@@ -1,22 +1,43 @@
 import { describe, expect, test } from '@jest/globals';
 
-import config from '../src/config.js';
-import { applyOperation, stringifyOperation } from '../games/calc-rules.js';
-
-const {
-  RANDOM_INT_RANGE,
+import utils from '../src/utils.js';
+import {
   OPERATIONS,
-} = config;
+  generateOperation,
+  stringifyOperation,
+  applyOperation,
+} from '../src/games/calc-rules.js';
 
-const RANDOM_INT_CEIL = RANDOM_INT_RANGE[1] + 1;
-const getRandomInteger = () => Math.floor(Math.random() * RANDOM_INT_CEIL);
-const getRandomPair = () => ({ a: getRandomInteger(), b: getRandomInteger() });
+const { DEFAULT_INT_RANGE: [MIN_INT, MAX_INT] } = utils;
+
+describe('Test generateOperation:', () => {
+  describe('() => { a, b, op } |', () => {
+    const loopCount = 10;
+
+    for (let i = 0; i < loopCount; i += 1) {
+      const { a, b, op } = generateOperation();
+      test(`op = '${op}' | op ∈ ${OPERATIONS}`, () => {
+        expect(OPERATIONS.includes(op)).toBe(true);
+      });
+
+      const isInRange = (n) => MIN_INT <= n && n <= MAX_INT;
+
+      test(`a = ${a} | ${MIN_INT} <= a <= ${MAX_INT}`, () => {
+        expect(isInRange(a)).toBe(true);
+      });
+
+      test(`b = ${b} | ${MIN_INT} <= b <= ${MAX_INT}`, () => {
+        expect(isInRange(b)).toBe(true);
+      });
+    }
+  });
+});
 
 describe('Test stringifyOperation:', () => {
-  test('stringifyOperation({ a, b, op }) === "a op b"', () => {
-    expect(OPERATIONS.every((op) => (
-      stringifyOperation({ a: 1, b: 2, op }) === `1 ${op} 2`
-    ))).toBe(true);
+  OPERATIONS.forEach((op) => {
+    test(`({ 0, 1, ${op} }) => '0 ${op} 1'`, () => {
+      expect(stringifyOperation({ a: 0, b: 1, op })).toBe(`0 ${op} 1`);
+    });
   });
 });
 
@@ -27,26 +48,28 @@ describe('Test applyOperation:', () => {
   for (let i = 0; i < length; i += 1) {
     const op = OPERATIONS[i];
 
-    test(`applyOperation({ a, b, '${op}' }) === a ${op} b`, () => {
-      for (let j = 0; j < loopCount; j += 1) {
-        const { a, b } = getRandomPair();
-        let result = a;
+    for (let j = 0; j < loopCount; j += 1) {
+      const a = utils.getRandomInteger([MIN_INT, MAX_INT]);
+      const b = utils.getRandomInteger([MIN_INT, MAX_INT]);
 
-        switch (op) {
-          case '-':
-            result -= b;
-            break;
-          case '+':
-            result += b;
-            break;
-          case '*':
-            result *= b;
-            break;
-          default:
-        }
+      let result = a;
 
-        expect(applyOperation({ a, b, op })).toBe(result);
+      switch (op) {
+        case '-':
+          result -= b;
+          break;
+        case '+':
+          result += b;
+          break;
+        case '*':
+          result *= b;
+          break;
+        default:
       }
-    });
+
+      test(`({ a = ${a}, b = ${b}, '${op}' }) => ${result}`, () => {
+        expect(applyOperation({ a, b, op })).toBe(result);
+      });
+    }
   }
 });

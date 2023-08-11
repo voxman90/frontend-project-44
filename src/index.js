@@ -1,39 +1,39 @@
 import readlineSync from 'readline-sync';
 
-import config from './config.js';
+const MESSAGES = {
+  intro: 'Welcome to the Brain Games!',
+  askUserName: 'May I have your name? ',
+  greetings: (userName) => `Hello, ${userName}!`,
+  answer: 'Your answer: ',
+  question: (details) => `Question: ${details}`,
+  correctAnswer: 'Correct!',
+  wrongAnswer: (userAnsw, correctAnsw) => (
+    `'${userAnsw}' is wrong answer ;(. Correct answer was '${correctAnsw}'.`
+  ),
+  userLoses: (userName) => `Let's try again, ${userName}!`,
+  userWins: (userName) => `Congratulations, ${userName}!`,
+};
+const QUESTIONS_PER_GAME = 3;
 
-const {
-  MESSAGES,
-  QUESTIONS_PER_GAME,
-} = config;
-
-const gameSession = (gameRules) => {
-  // display the game rule
-  console.log(gameRules.RULE);
+const gameSession = (gameQuestion, gameRules) => {
+  console.log(gameQuestion);
 
   let isGameOver = false;
   let isUserLoses = false;
   let answerCount = 0;
 
   do {
-    /*
-      Get the game-specific form of the question content,
-      its string representation and the correct answer (string)
-    */
-    const question = gameRules.generateQuestion();
-    const questionDetails = gameRules.stringifyQuestion(question);
-    const correctAnswer = `${gameRules.getAnswer(question)}`;
+    const { question, answer: correctAnswer } = gameRules.generateQuestionAnswerPair();
 
-    // Get the user's answer to the question and check it
-    console.log(MESSAGES.question(questionDetails));
+    console.log(MESSAGES.question(question));
     const userAnswer = readlineSync.question(MESSAGES.answer);
     const isUserAnswerCorrect = correctAnswer === userAnswer;
 
     if (isUserAnswerCorrect) {
-      console.log(MESSAGES.correctAnsw);
+      console.log(MESSAGES.correctAnswer);
       answerCount += 1;
     } else {
-      console.log(MESSAGES.wrongAnsw(userAnswer, correctAnswer));
+      console.log(MESSAGES.wrongAnswer(userAnswer, correctAnswer));
       isUserLoses = true;
     }
 
@@ -43,19 +43,16 @@ const gameSession = (gameRules) => {
   return isUserLoses;
 };
 
-const gameEngine = (gameRules = null) => {
-  // Display the intro, get the user's name and greet the user
+const gameEngine = (gameQuestion = '', gameRules = null) => {
   console.log(MESSAGES.intro);
   const userName = readlineSync.question(MESSAGES.askUserName);
   console.log(MESSAGES.greetings(userName));
 
-  // If the rules of the game aren't set, the program is terminated
   if (gameRules === null) {
     return;
   }
 
-  // Getting the result of the game session (according to the gameRules)
-  const isUserLoses = gameSession(gameRules);
+  const isUserLoses = gameSession(gameQuestion, gameRules);
 
   const conclusion = (isUserLoses) ? MESSAGES.userLoses : MESSAGES.userWins;
   console.log(conclusion(userName));

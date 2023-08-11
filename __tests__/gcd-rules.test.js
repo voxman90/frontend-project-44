@@ -1,44 +1,86 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, expect, test } from '@jest/globals';
 
-import { generatePair, stringifyPair, getGCD } from '../games/gcd-rules.js';
+import utils from '../src/utils.js';
+import {
+  generatePair,
+  stringifyPair,
+  getGCD,
+} from '../src/games/gcd-rules.js';
+
+const { DEFAULT_INT_RANGE: [MIN_INT, MAX_INT] } = utils;
 
 describe('Test generatePair:', () => {
-  test('generatePair() === { a, b }', () => {
+  const loopCount = 10;
+
+  const isIntegerAndInRange = (n) => (
+    `${typeof n}` === 'number'
+    && n === Math.floor(n)
+  );
+
+  for (let i = 0; i < loopCount; i += 1) {
     const { a, b } = generatePair();
-    expect(a).not.toBe(undefined);
-    expect(b).not.toBe(undefined);
-  });
+    describe(`() => { a = ${a}, b = ${b} } |`, () => {
+      test(`a = ${a} | integer(a) && ${MIN_INT} <= a <= ${MAX_INT}`, () => {
+        expect(isIntegerAndInRange(a)).toBe(true);
+      });
+
+      test(`b = ${b} | ineger(b) && ${MIN_INT} <= b <= ${MAX_INT}`, () => {
+        expect(isIntegerAndInRange(b)).toBe(true);
+      });
+    });
+  }
 });
 
 describe('Test stringifyPair:', () => {
-  test('stringifyPair({ a, b }) === \'a b\'', () => {
+  test('({ a, b }) => \'a b\'', () => {
     expect(stringifyPair({ a: 0, b: 1 })).toBe('0 1');
     expect(stringifyPair({ a: 1, b: 0 })).toBe('1 0');
   });
 });
 
 describe('Test getGCD:', () => {
-  test('getGCD({ a, b }) === getGCD({ b, a })', () => {
-    expect(getGCD({ a: 71, b: 83 })).toBe(getGCD({ a: 83, b: 71 }));
+  const primeNumbers = [
+    53, 59, 61, 67, 71,
+    73, 79, 83, 89, 97,
+  ];
+  const nonPrimeNumbers = [
+    4, 9, 16, 32, 32,
+    45, 72, 84, 100, 121,
+  ];
+  const loopCount = 5;
+
+  test('({ a, 0 }) => a', () => {
+    for (let i = 0; i < primeNumbers.length; i += 1) {
+      expect(getGCD(primeNumbers[i], 0)).toBe(primeNumbers[i]);
+    }
   });
 
-  test('getGCD({ a, b }) === 1 | prime(a) && prime(b)', () => {
-    expect(getGCD({ a: 71, b: 83 })).toBe(1);
-    expect(getGCD({ a: 3, b: 2 })).toBe(1);
-    expect(getGCD({ a: 7, b: 213 })).toBe(1);
+  test('({ a, a }) => a', () => {
+    for (let a = 1; a <= loopCount; a += 1) {
+      expect(getGCD(a, a)).toBe(a);
+    }
   });
 
-  test('getGCD({ a, a }) === a', () => {
-    const a = 13 ** 2 * 4 ** 2;
-    expect(getGCD({ a, b: a })).toBe(a);
+  test('({ a, b }) <=> ({ b, a })', () => {
+    for (let i = 0; i < nonPrimeNumbers.length; i += 1) {
+      const a = nonPrimeNumbers.at(i);
+      const b = nonPrimeNumbers.at(-i - 1);
+      expect(getGCD(a, b)).toBe(getGCD(b, a));
+    }
   });
 
-  test('getGCD({ a, b }) === (a, b)', () => {
-    const gcd = 2 * 3 ** 2 * 5 * 7;
+  test('({ a, b }) => 1 | (a, b) = 1', () => {
+    for (let i = 0; i < primeNumbers.length; i += 1) {
+      expect(getGCD(primeNumbers.at(i), primeNumbers.at(-i - 1))).toBe(1);
+    }
+  });
 
-    // (71, 119) === 1
-    const a = gcd * 71;
-    const b = gcd * 119;
-    expect(getGCD({ a, b })).toBe(gcd);
+  test('({ a, b }) => c | (a, b) = c, c > 1', () => {
+    for (let i = 0; i < primeNumbers.length; i += 1) {
+      const gcd = 4 * 9 * 25;
+      const a = gcd * primeNumbers.at(i);
+      const b = gcd * primeNumbers.at(-i - 1);
+      expect(getGCD(a, b)).toBe(gcd);
+    }
   });
 });

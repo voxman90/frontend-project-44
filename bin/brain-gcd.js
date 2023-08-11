@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import gameEngine from '../src/index.js';
-import gcdRules from '../games/gcd-rules.js';
+import gcdRules from '../src/games/gcd-rules.js';
 
-gameEngine(gcdRules);
+const gcdGameQuesqtion = 'Find the greatest common divisor of given numbers.';
+
+gameEngine(gcdGameQuesqtion, gcdRules);

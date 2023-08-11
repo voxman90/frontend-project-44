@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import gameEngine from '../src/index.js';
-import calcRules from '../games/calc-rules.js';
+import calcRules from '../src/games/calc-rules.js';
 
-gameEngine(calcRules);
+const calcGameQuestion = 'What is the result of the expression?';
+
+gameEngine(calcGameQuestion, calcRules);

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import gameEngine from '../src/index.js';
-import progressionRules from '../games/progression-rules.js';
+import progressionRules from '../src/games/progression-rules.js';
 
-gameEngine(progressionRules);
+const progressionGameQuestion = 'What number is missing in the progression?';
+
+gameEngine(progressionGameQuestion, progressionRules);
