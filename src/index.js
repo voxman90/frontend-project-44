@@ -18,11 +18,7 @@ const QUESTIONS_PER_GAME = 3;
 const gameSession = (gameQuestion, gameRules) => {
   console.log(gameQuestion);
 
-  let isGameOver = false;
-  let isUserLoses = false;
-  let answerCount = 0;
-
-  do {
+  for (let answerCount = 0; answerCount < QUESTIONS_PER_GAME; answerCount += 1) {
     const { question, answer: correctAnswer } = gameRules.generateQuestionAnswerPair();
 
     console.log(MESSAGES.question(question));
@@ -31,16 +27,13 @@ const gameSession = (gameQuestion, gameRules) => {
 
     if (isUserAnswerCorrect) {
       console.log(MESSAGES.correctAnswer);
-      answerCount += 1;
     } else {
       console.log(MESSAGES.wrongAnswer(userAnswer, correctAnswer));
-      isUserLoses = true;
+      return false;
     }
+  }
 
-    isGameOver = !isUserLoses && answerCount < QUESTIONS_PER_GAME;
-  } while (isGameOver);
-
-  return isUserLoses;
+  return true;
 };
 
 const gameEngine = (gameQuestion = '', gameRules = null) => {
@@ -52,9 +45,9 @@ const gameEngine = (gameQuestion = '', gameRules = null) => {
     return;
   }
 
-  const isUserLoses = gameSession(gameQuestion, gameRules);
+  const isUserWins = gameSession(gameQuestion, gameRules);
 
-  const conclusion = (isUserLoses) ? MESSAGES.userLoses : MESSAGES.userWins;
+  const conclusion = (isUserWins) ? MESSAGES.userWins : MESSAGES.userLoses;
   console.log(conclusion(userName));
 };
 
