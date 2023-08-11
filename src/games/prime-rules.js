@@ -5,13 +5,13 @@ const PRIME_NUMBERS_RANGE = [2, 97];
 const isPrime = (n) => {
   const isEven = n % 2 === 0;
   const isNonPrimalEven = n > 2 && isEven;
-  if (n === 1 || isNonPrimalEven) {
-    return false;
-  }
-
   const squareRoot = Math.sqrt(n);
   const isSquare = n % squareRoot === 0;
-  if (isSquare) {
+  if (
+    n === 1
+    || isNonPrimalEven
+    || isSquare
+  ) {
     return false;
   }
 

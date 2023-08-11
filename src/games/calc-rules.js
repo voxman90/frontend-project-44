@@ -46,7 +46,6 @@ const generateQuestionAnswerPair = () => {
 
 export default { generateQuestionAnswerPair };
 export {
-  generateOperation,
   stringifyOperation,
   applyOperation,
   OPERATIONS,

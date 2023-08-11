@@ -25,7 +25,6 @@ const getRandomProgression = ({ baseRange, incRange, sizeRange } = {}) => {
 };
 
 export default {
-  DEFAULT_INT_RANGE,
   DEFAULT_LENGTH_RANGE,
   getRandomInteger,
   getRandomProgression,

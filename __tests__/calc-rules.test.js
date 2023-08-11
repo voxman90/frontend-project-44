@@ -3,31 +3,9 @@ import { describe, expect, test } from '@jest/globals';
 import utils from '../src/utils.js';
 import {
   OPERATIONS,
-  generateOperation,
   stringifyOperation,
   applyOperation,
 } from '../src/games/calc-rules.js';
-
-const { DEFAULT_INT_RANGE: [MIN_INT, MAX_INT] } = utils;
-
-describe('Test generateOperation:', () => {
-  describe('() => { a, b, op } |', () => {
-    const loopCount = 10;
-
-    for (let i = 0; i < loopCount; i += 1) {
-      const { a, b, op } = generateOperation();
-      test(`op = '${op}' | op ∈ ${OPERATIONS}`, () => {
-        expect(OPERATIONS.includes(op)).toBe(true);
-      });
-
-      const isInRange = (n) => MIN_INT <= n && n <= MAX_INT;
-
-      test(`a = ${a} | ${MIN_INT} <= a <= ${MAX_INT};\n b = ${b} | ${MIN_INT} <= b <= ${MAX_INT}`, () => {
-        expect(isInRange(a) && isInRange(b)).toBe(true);
-      });
-    }
-  });
-});
 
 describe('Test stringifyOperation:', () => {
   OPERATIONS.forEach((op) => {
@@ -36,6 +14,9 @@ describe('Test stringifyOperation:', () => {
     });
   });
 });
+
+const MIN_INT = -100;
+const MAX_INT = 100;
 
 describe('Test applyOperation:', () => {
   const loopCount = 10;

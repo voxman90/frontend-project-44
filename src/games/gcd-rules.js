@@ -28,7 +28,6 @@ const generateQuestionAnswerPair = () => {
 
 export default { generateQuestionAnswerPair };
 export {
-  generatePair,
   stringifyPair,
   getGCD,
 };
