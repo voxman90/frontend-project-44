@@ -18,10 +18,7 @@ const isPrime = (n) => {
   let checkedNumber = 3;
   const checkLimit = Math.floor(squareRoot);
   let hasNonTrivialDivisor = false;
-  while (
-    checkedNumber <= checkLimit
-    && !hasNonTrivialDivisor
-  ) {
+  while (checkedNumber <= checkLimit && !hasNonTrivialDivisor) {
     hasNonTrivialDivisor = n % checkedNumber === 0;
     checkedNumber += 2;
   }

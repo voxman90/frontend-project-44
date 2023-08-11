@@ -11,7 +11,6 @@ const { DEFAULT_INT_RANGE: [MIN_INT, MAX_INT] } = utils;
 
 describe('Test generatePair:', () => {
   const loopCount = 10;
-
   const isIntegerAndInRange = (n) => (
     `${typeof n}` === 'number'
     && n === Math.floor(n)
@@ -19,13 +18,10 @@ describe('Test generatePair:', () => {
 
   for (let i = 0; i < loopCount; i += 1) {
     const { a, b } = generatePair();
-    describe(`() => { a = ${a}, b = ${b} } |`, () => {
-      test(`a = ${a} | integer(a) && ${MIN_INT} <= a <= ${MAX_INT}`, () => {
-        expect(isIntegerAndInRange(a)).toBe(true);
-      });
 
-      test(`b = ${b} | ineger(b) && ${MIN_INT} <= b <= ${MAX_INT}`, () => {
-        expect(isIntegerAndInRange(b)).toBe(true);
+    describe(`() => { a = ${a}, b = ${b} } |`, () => {
+      test(`a = ${a} | integer(a) && ${MIN_INT} <= a <= ${MAX_INT};\n b = ${b} | ineger(b) && ${MIN_INT} <= b <= ${MAX_INT}`, () => {
+        expect(isIntegerAndInRange(a) && isIntegerAndInRange(b)).toBe(true);
       });
     });
   }

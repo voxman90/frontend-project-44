@@ -22,12 +22,8 @@ describe('Test generateOperation:', () => {
 
       const isInRange = (n) => MIN_INT <= n && n <= MAX_INT;
 
-      test(`a = ${a} | ${MIN_INT} <= a <= ${MAX_INT}`, () => {
-        expect(isInRange(a)).toBe(true);
-      });
-
-      test(`b = ${b} | ${MIN_INT} <= b <= ${MAX_INT}`, () => {
-        expect(isInRange(b)).toBe(true);
+      test(`a = ${a} | ${MIN_INT} <= a <= ${MAX_INT};\n b = ${b} | ${MIN_INT} <= b <= ${MAX_INT}`, () => {
+        expect(isInRange(a) && isInRange(b)).toBe(true);
       });
     }
   });
