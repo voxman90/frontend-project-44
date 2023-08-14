@@ -1,13 +1,11 @@
 {
     "root": true,
     "env": {
-        "browser": true,
-        "es2021": true,
-        "jest": true
+        "node": true,
+        "es2021": true
     },
     "extends": [
-        "airbnb-base",
-        "plugin:jest/recommended"
+        "airbnb-base"
     ],
     "parserOptions": {
         "ecmaVersion": 12,

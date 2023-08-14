@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
-  "version": "0.0.8",
-  "description": "[![Actions Status](https://github.com/voxman90/frontend-project-44/workflows/hexlet-check/badge.svg)](https://github.com/voxman90/frontend-project-44/actions)",
+  "version": "0.0.9",
+  "description": "A few casual math games for the console",
   "bin": {
     "brain-calc": "bin/brain-calc.js",
     "brain-even": "bin/brain-even.js",
@@ -12,7 +12,7 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "test": "npx jest"
+    "test": "echo ''"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,7 @@
   },
   "keywords": [
     "js",
-    "Makefile",
-    "jest"
+    "Makefile"
   ],
   "author": "Maxim Byts",
   "license": "ISC",
@@ -31,12 +30,8 @@
     "readline-sync": "*"
   },
   "devDependencies": {
-    "@jest/globals": "^29.6.2",
     "eslint": "^8.46.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.28.0",
-    "eslint-plugin-jest": "^27.2.3",
-    "jest": "^29.6.2",
-    "jest-cli": "^29.6.2"
+    "eslint-plugin-import": "^2.28.0"
   }
 }

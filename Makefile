@@ -24,6 +24,3 @@ lint:
 
 publish:
 		npm publish --dry-run && sudo npm link
-
-test:
-		node --experimental-vm-modules node_modules/jest/bin/jest.js
