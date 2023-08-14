@@ -1,15 +1,13 @@
-import utils from '../utils.js';
-
-const isEven = (n) => n % 2 === 0;
+import { getRandomInteger } from '../utils.js';
 
 const generateQuestionAnswerPair = () => {
-  const n = utils.getRandomInteger();
+  const value = getRandomInteger();
+  const isEvenOrNo = value % 2 === 0 ? 'yes' : 'no';
 
   return {
-    question: `${n}`,
-    answer: isEven(n) ? 'yes' : 'no',
+    question: `${value}`,
+    answer: isEvenOrNo,
   };
 };
 
 export default { generateQuestionAnswerPair };
-export { isEven };

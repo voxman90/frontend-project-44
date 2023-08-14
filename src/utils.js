@@ -6,3 +6,4 @@ const getRandomInteger = (range = DEFAULT_INT_RANGE) => {
 };
 
 export default { getRandomInteger };
+export { getRandomInteger };

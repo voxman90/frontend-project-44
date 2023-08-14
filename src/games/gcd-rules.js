@@ -1,33 +1,24 @@
-import utils from '../utils.js';
+import { getRandomInteger } from '../utils.js';
 
-const generatePair = () => ({
-  a: utils.getRandomInteger(),
-  b: utils.getRandomInteger(),
-});
-
-const stringifyPair = ({ a, b }) => `${a} ${b}`;
-
-const gcdRec = (a, b) => {
-  if (b === 0) {
-    return a;
+const gcdIter = (integerA, integerB) => {
+  if (integerB === 0) {
+    return integerA;
   }
 
-  return gcdRec(b, a % b);
+  return gcdIter(integerB, integerA % integerB);
 };
 
-const getGCD = (a, b) => ((a < b) ? gcdRec(b, a) : gcdRec(a, b));
-
 const generateQuestionAnswerPair = () => {
-  const pair = generatePair();
+  const integerA = getRandomInteger();
+  const integerB = getRandomInteger();
+  const gdc = (integerA < integerB)
+    ? gcdIter(integerB, integerA)
+    : gcdIter(integerA, integerB);
 
   return {
-    question: stringifyPair(pair),
-    answer: `${getGCD(pair.a, pair.b)}`,
+    question: `${integerA} ${integerB}`,
+    answer: `${gdc}`,
   };
 };
 
 export default { generateQuestionAnswerPair };
-export {
-  stringifyPair,
-  getGCD,
-};

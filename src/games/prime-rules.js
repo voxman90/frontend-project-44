@@ -1,14 +1,14 @@
-import utils from '../utils.js';
+import { getRandomInteger } from '../utils.js';
 
 const PRIME_NUMBERS_RANGE = [2, 97];
 
-const isPrime = (n) => {
-  const isEven = n % 2 === 0;
-  const isNonPrimalEven = n > 2 && isEven;
-  const squareRoot = Math.sqrt(n);
-  const isSquare = n % squareRoot === 0;
+const isPrime = (integer) => {
+  const isEven = integer % 2 === 0;
+  const isNonPrimalEven = integer > 2 && isEven;
+  const squareRoot = Math.sqrt(integer);
+  const isSquare = integer % squareRoot === 0;
   if (
-    n === 1
+    integer === 1
     || isNonPrimalEven
     || isSquare
   ) {
@@ -18,8 +18,11 @@ const isPrime = (n) => {
   let checkedNumber = 3;
   const checkLimit = Math.floor(squareRoot);
   let hasNonTrivialDivisor = false;
-  while (checkedNumber <= checkLimit && !hasNonTrivialDivisor) {
-    hasNonTrivialDivisor = n % checkedNumber === 0;
+  while (
+    checkedNumber <= checkLimit
+    && !hasNonTrivialDivisor
+  ) {
+    hasNonTrivialDivisor = integer % checkedNumber === 0;
     checkedNumber += 2;
   }
 
@@ -27,13 +30,12 @@ const isPrime = (n) => {
 };
 
 const generateQuestionAnswerPair = () => {
-  const n = utils.getRandomInteger(PRIME_NUMBERS_RANGE);
+  const integer = getRandomInteger(PRIME_NUMBERS_RANGE);
 
   return {
-    question: `${n}`,
-    answer: isPrime(n) ? 'yes' : 'no',
+    question: `${integer}`,
+    answer: isPrime(integer) ? 'yes' : 'no',
   };
 };
 
 export default { generateQuestionAnswerPair };
-export { isPrime };
