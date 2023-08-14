@@ -24,7 +24,8 @@ const applyArithmeticOperation = ({ arithmeticOperation, operandA, operandB }) =
 const generateQuestionAnswerPair = () => {
   const operandA = getRandomInteger(OPERAND_RANGE);
   const operandB = getRandomInteger(OPERAND_RANGE);
-  const arithmeticOperation = getRandomInteger([OPERATION_MIN_INDEX, OPERATION_MAX_INDEX]);
+  const operationIndex = getRandomInteger([OPERATION_MIN_INDEX, OPERATION_MAX_INDEX]);
+  const arithmeticOperation = OPERATIONS[operationIndex];
   const result = applyArithmeticOperation({ arithmeticOperation, operandA, operandB });
 
   return {
