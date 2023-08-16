@@ -1,24 +1,21 @@
 import { getRandomInteger } from '../utils.js';
 
-const gcdIter = (integerA, integerB) => {
-  if (integerB === 0) {
-    return integerA;
+const getGCD = (intA, intB) => {
+  if (intB === 0) {
+    return Math.abs(intA);
   }
 
-  return gcdIter(integerB, integerA % integerB);
+  return getGCD(intB, intA % intB);
 };
 
 const generateQuestionAnswerPair = () => {
-  const integerA = getRandomInteger();
-  const integerB = getRandomInteger();
-  const gdc = (integerA < integerB)
-    ? gcdIter(integerB, integerA)
-    : gcdIter(integerA, integerB);
+  const intA = getRandomInteger();
+  const intB = getRandomInteger();
 
-  return {
-    question: `${integerA} ${integerB}`,
-    answer: `${gdc}`,
-  };
+  const question = `${intA} ${intB}`;
+  const answer = getGCD(intA, intB).toString();
+
+  return [question, answer];
 };
 
 export default { generateQuestionAnswerPair };

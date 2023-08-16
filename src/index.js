@@ -10,7 +10,7 @@ const gameSession = (gameQuestion, gameRules) => {
   console.log(gameQuestion);
 
   for (let answerCount = 0; answerCount < QUESTIONS_PER_GAME; answerCount += 1) {
-    const { question, answer: correctAnswer } = gameRules.generateQuestionAnswerPair();
+    const [question, correctAnswer] = gameRules.generateQuestionAnswerPair();
 
     console.log(`Question: ${question}`);
     const userAnswer = readlineSync.question('Your answer: ');

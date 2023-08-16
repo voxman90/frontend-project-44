@@ -2,40 +2,40 @@ import { getRandomInteger } from '../utils.js';
 
 const PRIME_NUMBERS_RANGE = [2, 97];
 
-const isPrime = (integer) => {
-  const isEven = integer % 2 === 0;
-  const isNonPrimalEven = integer > 2 && isEven;
-  const squareRoot = Math.sqrt(integer);
-  const isSquare = integer % squareRoot === 0;
+const isPrime = (int) => {
+  const isEven = int % 2 === 0;
+  const isNonPrimalEven = int > 2 && isEven;
+  const squareRoot = Math.sqrt(int);
+  const isSquare = int % squareRoot === 0;
   if (
-    integer === 1
+    int === 1
     || isNonPrimalEven
     || isSquare
   ) {
     return false;
   }
 
-  let checkedNumber = 3;
-  const checkLimit = Math.floor(squareRoot);
+  let checkedNum = 3;
+  const checkLimit = Math.floor(squareRoot) + 1;
   let hasNonTrivialDivisor = false;
   while (
-    checkedNumber <= checkLimit
+    checkedNum < checkLimit
     && !hasNonTrivialDivisor
   ) {
-    hasNonTrivialDivisor = integer % checkedNumber === 0;
-    checkedNumber += 2;
+    hasNonTrivialDivisor = int % checkedNum === 0;
+    checkedNum += 2;
   }
 
   return !hasNonTrivialDivisor;
 };
 
 const generateQuestionAnswerPair = () => {
-  const integer = getRandomInteger(PRIME_NUMBERS_RANGE);
+  const int = getRandomInteger(PRIME_NUMBERS_RANGE);
 
-  return {
-    question: `${integer}`,
-    answer: isPrime(integer) ? 'yes' : 'no',
-  };
+  const question = int.toString();
+  const answer = isPrime(int) ? 'yes' : 'no';
+
+  return [question, answer];
 };
 
 export default { generateQuestionAnswerPair };

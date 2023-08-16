@@ -2,8 +2,6 @@ import { getRandomInteger } from '../utils.js';
 
 const OPERATIONS = ['+', '-', '*'];
 const OPERAND_RANGE = [1, 20];
-const OPERATION_MIN_INDEX = 0;
-const OPERATION_MAX_INDEX = OPERATIONS.length - 1;
 
 const applyArithmeticOperation = ({ arithmeticOperation, operandA, operandB }) => {
   switch (arithmeticOperation) {
@@ -16,22 +14,28 @@ const applyArithmeticOperation = ({ arithmeticOperation, operandA, operandB }) =
     case '*': {
       return operandA * operandB;
     }
-    default:
+    default: {
       return null;
+    }
   }
 };
 
 const generateQuestionAnswerPair = () => {
   const operandA = getRandomInteger(OPERAND_RANGE);
   const operandB = getRandomInteger(OPERAND_RANGE);
-  const operationIndex = getRandomInteger([OPERATION_MIN_INDEX, OPERATION_MAX_INDEX]);
-  const arithmeticOperation = OPERATIONS[operationIndex];
-  const result = applyArithmeticOperation({ arithmeticOperation, operandA, operandB });
+  const operationIndex = getRandomInteger([0, OPERATIONS.length - 1]);
 
-  return {
-    question: `${operandA} ${arithmeticOperation} ${operandB}`,
-    answer: `${result}`,
-  };
+  const arithmeticOperation = OPERATIONS[operationIndex];
+  const operationResult = applyArithmeticOperation({
+    arithmeticOperation,
+    operandA,
+    operandB,
+  });
+
+  const question = `${operandA} ${arithmeticOperation} ${operandB}`;
+  const answer = operationResult.toString();
+
+  return [question, answer];
 };
 
 export default { generateQuestionAnswerPair };

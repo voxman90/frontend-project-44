@@ -1,13 +1,14 @@
 import { getRandomInteger } from '../utils.js';
 
-const generateQuestionAnswerPair = () => {
-  const value = getRandomInteger();
-  const isEvenOrNo = value % 2 === 0 ? 'yes' : 'no';
+const isEven = (int) => int % 2 === 0;
 
-  return {
-    question: `${value}`,
-    answer: isEvenOrNo,
-  };
+const generateQuestionAnswerPair = () => {
+  const int = getRandomInteger();
+
+  const question = int.toString();
+  const answer = isEven(int) ? 'yes' : 'no';
+
+  return [question, answer];
 };
 
 export default { generateQuestionAnswerPair };
