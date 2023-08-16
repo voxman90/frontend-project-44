@@ -15,7 +15,7 @@ const applyArithmeticOperation = ({ arithmeticOperation, operandA, operandB }) =
       return operandA * operandB;
     }
     default: {
-      return null;
+      throw new Error(`Invalid value of arithmeticOperation: ${arithmeticOperation}`);
     }
   }
 };
